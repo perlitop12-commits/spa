@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Слайд-шоу</title>
+    <style>
+        /* Сброс базовых отступов */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            overflow: hidden; /* Прячем прокрутку */
+        }
+
+        /* Контейнер для слайд-шоу */
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Общие стили для всех слайдов */
+        .slide {
+            display: none; /* По умолчанию скрываем все слайды */
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        /* Делаем активный слайд видимым */
+        .slide.active {
+            display: flex;
+        }
+
+        /* Стили для текстового слайда */
+        .text-slide {
+            font-size: 3rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #222222;
+        }
+
+        /* Стили для слайдов с картинками */
+        .image-slide img {
+            max-width: 90%;
+            max-height: 90vh;
+            object-fit: contain;
+            border-radius: 8px; /* Скругленные углы */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Легкая тень */
+        }
+
+        /* Кнопки управления (стрелки) */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 15px;
+            color: #222222;
+            font-weight: bold;
+            font-size: 2rem;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.05);
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+            z-index: 10;
+        }
+
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .prev { left: 20px; }
+        .next { right: 20px; }
+    </style>
+</head>
+<body>
+
+    <div class="slider-container">
+        <!-- Слайд 1: Текст -->
+        <div class="slide text-slide active">
+            миша долбоеб
+        </div>
+
+        <!-- Слайд 2: Картинка «Ну ладно шучу» -->
+        <div class="slide image-slide">
+            <img src="joke.png" alt="Ну ладно шучу">
+        </div>
+
+        <!-- Слайд 3: Скриншот с Phantom Lancer -->
+        <div class="slide image-slide">
+            <img src="dota.png" alt="Phantom Lancer">
+        </div>
+
+        <!-- Кнопки навигации -->
+        <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideInterval = 3000; // Слайд меняется раз в 3 секунды
+
+        function showSlide(index) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (index + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            clearInterval(autoScroll);
+            showSlide(currentSlide + direction);
+            autoScroll = setInterval(nextSlide, slideInterval);
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        let autoScroll = setInterval(nextSlide, slideInterval);
+    </script>
+
+</body>
+</html>
