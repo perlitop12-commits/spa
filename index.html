@@ -1,11 +1,10 @@
-<!DOCTYPE html>
+DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Слайд-шоу</title>
     <style>
-        /* Сброс базовых отступов */
         * {
             margin: 0;
             padding: 0;
@@ -17,10 +16,9 @@
             height: 100%;
             font-family: Arial, sans-serif;
             background-color: #ffffff;
-            overflow: hidden; /* Прячем прокрутку */
+            overflow: hidden;
         }
 
-        /* Контейнер для слайд-шоу */
         .slider-container {
             position: relative;
             width: 100%;
@@ -30,9 +28,8 @@
             align-items: center;
         }
 
-        /* Общие стили для всех слайдов */
         .slide {
-            display: none; /* По умолчанию скрываем все слайды */
+            display: none;
             position: absolute;
             width: 100%;
             height: 100%;
@@ -42,12 +39,10 @@
             padding: 20px;
         }
 
-        /* Делаем активный слайд видимым */
         .slide.active {
             display: flex;
         }
 
-        /* Стили для текстового слайда */
         .text-slide {
             font-size: 3rem;
             font-weight: bold;
@@ -56,16 +51,14 @@
             color: #222222;
         }
 
-        /* Стили для слайдов с картинками */
         .image-slide img {
             max-width: 90%;
             max-height: 90vh;
             object-fit: contain;
-            border-radius: 8px; /* Скругленные углы */
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Легкая тень */
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
-        /* Кнопки управления (стрелки) */
         .prev, .next {
             cursor: pointer;
             position: absolute;
@@ -109,12 +102,11 @@
             <img src="joke.png" alt="Ну ладно шучу">
         </div>
 
-        <!-- Слайд 3: Скриншот с Phantom Lancer -->
+        <!-- Слайд 3: Зашифрованный скриншот с Phantom Lancer -->
         <div class="slide image-slide">
-            <img src="dota.png" alt="Phantom Lancer">
+            <img src="https://githubusercontent.com" alt="Phantom Lancer">
         </div>
 
-        <!-- Кнопки навигации -->
         <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
         <button class="next" onclick="changeSlide(1)">&#10095;</button>
     </div>
@@ -122,7 +114,7 @@
     <script>
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide');
-        const slideInterval = 3000; // Слайд меняется раз в 3 секунды
+        const slideInterval = 3000;
 
         function showSlide(index) {
             slides[currentSlide].classList.remove('active');
